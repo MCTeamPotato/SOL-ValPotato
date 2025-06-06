@@ -1,4 +1,4 @@
-package org.mcteampotato.attchment.compat;
+package org.mcteampotato.fooddata.compat;
 
 import net.neoforged.fml.ModList;
 

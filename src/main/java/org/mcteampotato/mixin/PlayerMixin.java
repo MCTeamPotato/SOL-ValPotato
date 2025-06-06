@@ -1,29 +1,17 @@
 package org.mcteampotato.mixin;
 
-import net.minecraft.core.Holder;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.effect.MobEffect;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import org.mcteampotato.SOLValpotato;
-import org.mcteampotato.config.ValpotatoConfig;
+import org.mcteampotato.attchment.FoodDataAttachment;
+import org.mcteampotato.fooddata.FoodData;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import org.mcteampotato.attchment.FoodData;
-import org.mcteampotato.attchment.FoodDataAttachment;
-
-import java.util.Optional;
-
-import static org.mcteampotato.event.GameEvent.Effect;
 
 @Mixin(Player.class)
 public class PlayerMixin {
@@ -43,9 +31,10 @@ public class PlayerMixin {
             } else {
                 foodData.addFood(info, player);
             }
-            if (player instanceof ServerPlayer serverPlayer) {
-                Effect(serverPlayer);
-            }
+            //TODO 还有神秘的药水效果
+//            if (player instanceof ServerPlayer serverPlayer) {
+//                Effect(serverPlayer);
+//            }
         }
     }
 

@@ -3,7 +3,6 @@ package org.mcteampotato.attchment;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.NbtOps;
@@ -16,18 +15,18 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.common.util.DataComponentUtil;
 import net.neoforged.neoforge.common.util.INBTSerializable;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.NotNull;
 import org.mcteampotato.SOLValpotato;
 import org.mcteampotato.config.ValpotatoConfig;
+import org.mcteampotato.fooddata.FoodData;
+import org.mcteampotato.fooddata.FoodInstance;
+import org.mcteampotato.fooddata.IFoodSlots;
 import org.mcteampotato.network.SyncFoodDataPacket;
 
 import java.util.List;
-import java.util.stream.Stream;
 
-import static org.mcteampotato.event.GameEvent.Effect;
 
 public class FoodDataAttachment implements IFoodSlots, INBTSerializable<CompoundTag> {
     public static final ResourceLocation healthModifier = ResourceLocation.fromNamespaceAndPath(SOLValpotato.MOD_ID, "food_health_add");
@@ -79,7 +78,8 @@ public class FoodDataAttachment implements IFoodSlots, INBTSerializable<Compound
             if (foodInstance.getRemainingTicks() <= 0) {
                 slots.remove(foodInstance);
                 setHealthModifier(player);
-                Effect((ServerPlayer) player);
+                //TODO 还有神秘的药水效果（怎么tick那一次，这里又一次的，是嫌性能开销小吗）
+//                Effect((ServerPlayer) player);
                 PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncFoodDataPacket(serialize(player.level().registryAccess())));
             }
         }

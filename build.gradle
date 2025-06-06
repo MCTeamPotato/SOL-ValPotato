@@ -64,6 +64,7 @@ neoForge {
         }
 
         configureEach {
+            jvmArgument "-XX:+IgnoreUnrecognizedVMOptions"
             jvmArgument "-XX:+AllowEnhancedClassRedefinition"
             jvmArgument "-XX:HotswapAgent=fatjar"
         }

@@ -1,4 +1,4 @@
-package org.mcteampotato.attchment;
+package org.mcteampotato.fooddata;
 
 import net.minecraft.world.entity.player.Player;
 

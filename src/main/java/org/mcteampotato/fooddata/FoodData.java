@@ -1,15 +1,11 @@
-package org.mcteampotato.attchment;
+package org.mcteampotato.fooddata;
 
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import org.mcteampotato.attchment.compat.SOLCompat;
-import org.mcteampotato.attchment.compat.SomeAssemblyRequired;
+import org.mcteampotato.fooddata.compat.SOLCompat;
+import org.mcteampotato.fooddata.compat.SomeAssemblyRequired;
 
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.Optional;
 
 public class FoodData {
@@ -19,10 +15,11 @@ public class FoodData {
         FoodProperties props = Optional.ofNullable(itemStack.getFoodProperties(null)).orElse(empty);
         int nutrition = props.nutrition();
         if (nutrition <= 0) return null;
-        int durationTicks = (int) (10 * Math.log(nutrition+1) * 60 * 20);
-        float restore = (float) (0.1 + Math.log1p(Objects.requireNonNull(itemStack.getFoodProperties(null)).saturation()) / 3);
-        //        int durationTicks = (nutrition) * 60 * 20; // DEBUG;
-        FoodInfo foodInfo = new FoodInfo(itemStack, nutrition, props.saturation(), nutrition, durationTicks,restore);
+        int durationTicks = (int) (10 * Math.log1p(nutrition) * 60 * 20);
+//        int durationTicks = (nutrition) * 60 * 20; // DEBUG;
+        //TODO 把你奇妙的饱和度回复写了（heal的量至少0.5f为好，半颗心半颗心的）
+        float restore = (float) (0.1 + Math.log1p(props.saturation()) / 3);
+        FoodInfo foodInfo = new FoodInfo(itemStack, nutrition, props.saturation(), nutrition, durationTicks, restore);
         if (SOLCompat.isLoadSomeAssemblyRequired()) {
             foodInfo = SomeAssemblyRequired.tryResetFoodInfo(foodInfo, itemStack);
         }
@@ -36,21 +33,15 @@ public class FoodData {
         private final float saturation;
         private final int hearts;
         private final int durationTicks;
-        private final int maxExtraHearts;
         private final float restore;
 
         public FoodInfo(ItemStack itemStack, int nutrition, float saturation, int hearts, int durationTicks, float restore) {
-            this(itemStack, nutrition, saturation, hearts, durationTicks, restore, 0);
-        }
-
-        public FoodInfo(ItemStack itemStack, int nutrition, float saturation, int hearts, int durationTicks, float restore, int maxExtraHearts) {
             this.itemStack = itemStack;
             this.nutrition = nutrition;
             this.saturation = saturation;
             this.hearts = hearts;
             this.durationTicks = durationTicks;
             this.restore = restore;
-            this.maxExtraHearts = maxExtraHearts;
         }
 
         public ItemStack getItemStack() {
@@ -71,10 +62,6 @@ public class FoodData {
 
         public int getDurationTicks() {
             return durationTicks;
-        }
-
-        public int getMaxExtraHearts() {
-            return maxExtraHearts;
         }
 
         public float getRestore() {
