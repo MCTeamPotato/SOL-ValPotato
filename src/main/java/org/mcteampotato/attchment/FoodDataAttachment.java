@@ -27,6 +27,8 @@ import org.mcteampotato.network.SyncFoodDataPacket;
 import java.util.List;
 import java.util.stream.Stream;
 
+import static org.mcteampotato.event.GameEvent.Effect;
+
 public class FoodDataAttachment implements IFoodSlots, INBTSerializable<CompoundTag> {
     public static final ResourceLocation healthModifier = ResourceLocation.fromNamespaceAndPath(SOLValpotato.MOD_ID, "food_health_add");
     private final List<FoodInstance> slots = new ObjectArrayList<>();
@@ -77,6 +79,7 @@ public class FoodDataAttachment implements IFoodSlots, INBTSerializable<Compound
             if (foodInstance.getRemainingTicks() <= 0) {
                 slots.remove(foodInstance);
                 setHealthModifier(player);
+                Effect((ServerPlayer) player);
                 PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncFoodDataPacket(serialize(player.level().registryAccess())));
             }
         }

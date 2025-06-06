@@ -13,8 +13,11 @@ public class ValpotatoConfig {
             .comment("Whether to disable vanilla's food system")
             .translation("config.sol_valpotato.disable_vanilla")
             .define("disableVanillaFoodSystem", true);
-    public static final ConfigValue<String> EFFECT_TYPE = BUILDER
+    public static final ConfigValue<Boolean> EFFECT_TYPE = BUILDER
             .comment("The effect after eat food")
             .translation("config.sol_valpotato.effect_type")
-            .define("effectType", "minecraft:regeneration");
+            .define("effectType", true);
+
+
+
 }

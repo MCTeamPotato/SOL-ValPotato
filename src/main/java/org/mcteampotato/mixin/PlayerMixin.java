@@ -3,6 +3,7 @@ package org.mcteampotato.mixin;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -22,6 +23,8 @@ import org.mcteampotato.attchment.FoodDataAttachment;
 
 import java.util.Optional;
 
+import static org.mcteampotato.event.GameEvent.Effect;
+
 @Mixin(Player.class)
 public class PlayerMixin {
     @Inject(method = "eat", at = @At("HEAD"))
@@ -40,9 +43,10 @@ public class PlayerMixin {
             } else {
                 foodData.addFood(info, player);
             }
+            if (player instanceof ServerPlayer serverPlayer) {
+                Effect(serverPlayer);
+            }
         }
-        Optional<Holder.Reference<MobEffect>> holder = BuiltInRegistries.MOB_EFFECT.getHolder(ResourceLocation.parse(ValpotatoConfig.EFFECT_TYPE.get()));
-        holder.ifPresent(mobEffectReference -> player.addEffect(new MobEffectInstance(mobEffectReference, info.getSaturation() >= 30 ? 30 : Math.round(info.getSaturation()), (int) info.getSaturation() / 30)));
     }
 
     @Inject(method = "canEat", at = @At("HEAD"), cancellable = true)

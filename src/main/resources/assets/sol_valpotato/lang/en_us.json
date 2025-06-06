@@ -1,5 +1,7 @@
 {
   "config.sol_valpotato.food_slots": "Food Slots",
   "config.sol_valpotato.disable_vanilla": "Disable Vanilla Food System",
+  "config.sol_valpotato.effect_type": "Grants all potion effects from the consumed food",
   "tooltips.sol_valpotato.empty": "☠ Empty your stomach！"
+
 }

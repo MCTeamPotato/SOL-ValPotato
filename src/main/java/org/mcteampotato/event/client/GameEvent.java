@@ -21,6 +21,10 @@ public class GameEvent {
     @SubscribeEvent
     public static void overlayEvent(RenderGuiEvent.Post event) {
         Minecraft mc = Minecraft.getInstance();
+        if (mc.player == null) return;
+        if (mc.player.isCreative()) return;
+        if (mc.player.getAirSupply() < mc.player.getMaxAirSupply()) return;
+        if (mc.player.getVehicle() != null) return;
         FoodDataAttachment foodData = mc.player.getData(SOLValpotato.FOOD_DATA);
         GuiGraphics guiGraphics = event.getGuiGraphics();
         int width = guiGraphics.guiWidth() / 2 + 91;

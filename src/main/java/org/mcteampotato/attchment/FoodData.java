@@ -9,6 +9,7 @@ import org.mcteampotato.attchment.compat.SOLCompat;
 import org.mcteampotato.attchment.compat.SomeAssemblyRequired;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Optional;
 
 public class FoodData {
@@ -19,8 +20,9 @@ public class FoodData {
         int nutrition = props.nutrition();
         if (nutrition <= 0) return null;
         int durationTicks = (int) (10 * Math.log(nutrition+1) * 60 * 20);
-//        int durationTicks = (nutrition) * 60 * 20; // DEBUG;
-        FoodInfo foodInfo = new FoodInfo(itemStack, nutrition, props.saturation(), nutrition, durationTicks);
+        float restore = (float) (0.1 + Math.log1p(Objects.requireNonNull(itemStack.getFoodProperties(null)).saturation()) / 3);
+        //        int durationTicks = (nutrition) * 60 * 20; // DEBUG;
+        FoodInfo foodInfo = new FoodInfo(itemStack, nutrition, props.saturation(), nutrition, durationTicks,restore);
         if (SOLCompat.isLoadSomeAssemblyRequired()) {
             foodInfo = SomeAssemblyRequired.tryResetFoodInfo(foodInfo, itemStack);
         }
@@ -35,17 +37,19 @@ public class FoodData {
         private final int hearts;
         private final int durationTicks;
         private final int maxExtraHearts;
+        private final float restore;
 
-        public FoodInfo(ItemStack itemStack, int nutrition, float saturation, int hearts, int durationTicks) {
-            this(itemStack, nutrition, saturation, hearts, durationTicks, 0);
+        public FoodInfo(ItemStack itemStack, int nutrition, float saturation, int hearts, int durationTicks, float restore) {
+            this(itemStack, nutrition, saturation, hearts, durationTicks, restore, 0);
         }
 
-        public FoodInfo(ItemStack itemStack, int nutrition, float saturation, int hearts, int durationTicks, int maxExtraHearts) {
+        public FoodInfo(ItemStack itemStack, int nutrition, float saturation, int hearts, int durationTicks, float restore, int maxExtraHearts) {
             this.itemStack = itemStack;
             this.nutrition = nutrition;
             this.saturation = saturation;
             this.hearts = hearts;
             this.durationTicks = durationTicks;
+            this.restore = restore;
             this.maxExtraHearts = maxExtraHearts;
         }
 
@@ -71,6 +75,10 @@ public class FoodData {
 
         public int getMaxExtraHearts() {
             return maxExtraHearts;
+        }
+
+        public float getRestore() {
+            return restore;
         }
     }
 }
