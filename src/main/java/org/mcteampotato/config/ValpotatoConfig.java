@@ -20,6 +20,14 @@ public class ValpotatoConfig {
             .comment("Grants all potion effects from the consumed food")
             .translation("config.sol_valpotato.enable_effect")
             .define("enableEffect", false);
+    public static final ConfigValue<Integer> EFFECT_MINIMUM_TICK = BUILDER
+            .comment("The minimum tick requirement for granting potion effects to food")
+            .translation("config.sol_valpotato.effect_minimum_tick")
+            .define("effectMinimumTick", 20);
+    public static final ConfigValue<Integer> EFFECT_INTERVAL_TICK = BUILDER
+            .comment("The interval for granting food with potion effects")
+            .translation("config.sol_valpotato.effect_interval_tick")
+            .define("effectIntervalTick", 400);
     public static final ConfigValue<Boolean> ENABLE_HEAL = BUILDER
             .comment("Enable Heal after the war")
             .translation("config.sol_valpotato.enable_heal")

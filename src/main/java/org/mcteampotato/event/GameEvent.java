@@ -43,13 +43,12 @@ public class GameEvent {
                 return;
             }
             List<Component> list = new ArrayList<>();
-            list.add(Component.literal("❤ %.1f Heart".formatted(((float) foodInfo.getHearts()) / 2)).withStyle(ChatFormatting.RED));
-            list.add(Component.literal("⌚ %.1f Minute".formatted(((float) foodInfo.getDurationTicks()) / 1200)).withStyle(ChatFormatting.GOLD));
+            list.add(Component.literal("❤ %.1f ".formatted(((float) foodInfo.getHearts()) / 2)).append(Component.translatable("tooltips.sol_valpotato.heart")).withStyle(ChatFormatting.RED));
             FoodHealType healType = ValpotatoConfig.HEAL_TYPE.get();
-            //TODO 把你奇妙的饱和度回复写了（看看这里的tooltips要不要修正）
             if (healType == FoodHealType.SATURATION) {
-                list.add(Component.literal("⚡ %.1f Regen".formatted(foodInfo.getRestore())).withStyle(ChatFormatting.GREEN));
+                list.add(Component.literal("✚ %.1f ".formatted(foodInfo.getRestore())).append(Component.translatable("tooltips.sol_valpotato.regen")).withStyle(ChatFormatting.GREEN));
             }
+            list.add(Component.literal("⌚ %.1f ".formatted(((float) foodInfo.getDurationTicks()) / 1200)).append(Component.translatable("tooltips.sol_valpotato.minute")).withStyle(ChatFormatting.GOLD));
             toolTips.addAll(1, list);
         }
     }
@@ -104,7 +103,6 @@ public class GameEvent {
         if (player instanceof ServerPlayer serverPlayer) {
             foodData.tick(serverPlayer);
             FoodHealHandle.handle(serverPlayer);
-            //TODO 还有神秘的药水效果
         }
     }
 }

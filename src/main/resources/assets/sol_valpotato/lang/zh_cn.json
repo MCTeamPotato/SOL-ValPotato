@@ -1,6 +1,13 @@
 {
   "config.sol_valpotato.food_slots": "食物槽位",
   "config.sol_valpotato.disable_vanilla": "禁用原版食物系统",
-  "config.sol_valpotato.enable_effect": "赋予所食用食物的全部药水效果",
-  "tooltips.sol_valpotato.empty": "☠ 清空你的胃！"
+  "config.sol_valpotato.enable_effect": "启用食物的全部药水效果",
+  "config.sol_valpotato.effect_minimum_tick": "赋予食物药水效果的最低tick要求",
+  "config.sol_valpotato.effect_interval_tick": "赋予食物药水效果的间隔",
+  "config.sol_valpotato.enable_heal": "启用脱战治疗",
+  "config.sol_valpotato.heal_type": "脱战治疗类型",
+  "tooltips.sol_valpotato.empty": "☠ 清空你的胃！",
+  "tooltips.sol_valpotato.heart": "生命",
+  "tooltips.sol_valpotato.regen": "恢复",
+  "tooltips.sol_valpotato.minute": "分钟"
 }

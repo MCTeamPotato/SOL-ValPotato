@@ -78,8 +78,6 @@ public class FoodDataAttachment implements IFoodSlots, INBTSerializable<Compound
             if (foodInstance.getRemainingTicks() <= 0) {
                 slots.remove(foodInstance);
                 setHealthModifier(player);
-                //TODO 还有神秘的药水效果（怎么tick那一次，这里又一次的，是嫌性能开销小吗）
-//                Effect((ServerPlayer) player);
                 PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncFoodDataPacket(serialize(player.level().registryAccess())));
             }
         }
