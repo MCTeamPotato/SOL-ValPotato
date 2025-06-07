@@ -14,11 +14,12 @@ public class FoodData {
     public static FoodInfo getInfo(ItemStack itemStack) {
         FoodProperties props = Optional.ofNullable(itemStack.getFoodProperties(null)).orElse(empty);
         int nutrition = props.nutrition();
+        float saturation = props.saturation();
         if (nutrition <= 0) return null;
         int durationTicks = (int) (10 * Math.log1p(nutrition) * 60 * 20);
 //        int durationTicks = (nutrition) * 60 * 20; // DEBUG;
-        float restore = (float) (0.1 + Math.log1p(props.saturation()) / 3);
-        FoodInfo foodInfo = new FoodInfo(itemStack, nutrition, props.saturation(), nutrition, durationTicks, restore);
+        float restore = (float) (Math.ceil(0.2 + (nutrition * saturation) / (saturation + nutrition * 2)) / 2);
+        FoodInfo foodInfo = new FoodInfo(itemStack, nutrition, saturation, nutrition, durationTicks, restore);
         if (SOLCompat.isLoadSomeAssemblyRequired()) {
             foodInfo = SomeAssemblyRequired.tryResetFoodInfo(foodInfo, itemStack);
         }

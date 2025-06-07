@@ -6,7 +6,7 @@ import someassemblyrequired.item.sandwich.SandwichContents;
 import someassemblyrequired.registry.ModItems;
 
 public class SomeAssemblyRequired {
-    public static boolean isSandwich(ItemStack itemStack){
+    public static boolean isSandwich(ItemStack itemStack) {
         return itemStack.is(ModItems.SANDWICH);
     }
 
@@ -18,7 +18,7 @@ public class SomeAssemblyRequired {
             if (nutrition <= 0) return defaultInfo;
             int durationTicks = (int) (10 * Math.log1p(nutrition) * 60 * 20);
 //            int durationTicks = (nutrition) * 60 * 20; // DEBUG;
-            float restore = (float) (0.1 + Math.log1p(saturation) / 3);
+            float restore = (float) (Math.ceil(0.2 + (nutrition * saturation) / (saturation + nutrition * 2)) / 2);
             return new FoodData.FoodInfo(itemStack, nutrition, saturation, nutrition, durationTicks, restore);
         }
         return defaultInfo;

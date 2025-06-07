@@ -35,5 +35,5 @@ public class ValpotatoConfig {
     public static final EnumValue<FoodHealType> HEAL_TYPE = BUILDER
             .comment("Heal type after the war")
             .translation("config.sol_valpotato.heal_type")
-            .defineEnum("healType", FoodHealType.LINEAR);
+            .defineEnum("healType", FoodHealType.SATURATION);
 }
