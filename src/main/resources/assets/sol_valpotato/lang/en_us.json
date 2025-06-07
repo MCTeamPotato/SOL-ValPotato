@@ -2,6 +2,12 @@
   "config.sol_valpotato.food_slots": "Food Slots",
   "config.sol_valpotato.disable_vanilla": "Disable Vanilla Food System",
   "config.sol_valpotato.enable_effect": "Grants all potion effects from the consumed food",
-  "tooltips.sol_valpotato.empty": "☠ Empty your stomach！"
-
+  "config.sol_valpotato.effect_minimum_tick": "The minimum tick requirement for granting potion effects to food",
+  "config.sol_valpotato.effect_interval_tick": "The interval for granting food with potion effects",
+  "config.sol_valpotato.enable_heal": "Enable Heal after the war",
+  "config.sol_valpotato.heal_type": "Heal type after the war",
+  "tooltips.sol_valpotato.empty": "☠ Empty your stomach！",
+  "tooltips.sol_valpotato.regen": "Regen",
+  "tooltips.sol_valpotato.minute": "Minute",
+  "tooltips.sol_valpotato.heart": "Heart"
 }

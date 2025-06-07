@@ -17,7 +17,6 @@ public class FoodData {
         if (nutrition <= 0) return null;
         int durationTicks = (int) (10 * Math.log1p(nutrition) * 60 * 20);
 //        int durationTicks = (nutrition) * 60 * 20; // DEBUG;
-        //TODO 把你奇妙的饱和度回复写了（heal的量至少0.5f为好，半颗心半颗心的）
         float restore = (float) (0.1 + Math.log1p(props.saturation()) / 3);
         FoodInfo foodInfo = new FoodInfo(itemStack, nutrition, props.saturation(), nutrition, durationTicks, restore);
         if (SOLCompat.isLoadSomeAssemblyRequired()) {

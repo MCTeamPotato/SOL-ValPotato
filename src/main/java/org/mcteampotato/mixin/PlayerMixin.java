@@ -1,5 +1,6 @@
 package org.mcteampotato.mixin;
 
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ItemStack;
@@ -8,6 +9,7 @@ import net.minecraft.world.level.Level;
 import org.mcteampotato.SOLValpotato;
 import org.mcteampotato.attchment.FoodDataAttachment;
 import org.mcteampotato.fooddata.FoodData;
+import org.mcteampotato.fooddata.effect.FoodEffectHandle;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -31,10 +33,9 @@ public class PlayerMixin {
             } else {
                 foodData.addFood(info, player);
             }
-            //TODO 还有神秘的药水效果
-//            if (player instanceof ServerPlayer serverPlayer) {
-//                Effect(serverPlayer);
-//            }
+        }
+        if (player instanceof ServerPlayer serverPlayer) {
+            FoodEffectHandle.addAllFoodEffectInstance(serverPlayer);
         }
     }
 
